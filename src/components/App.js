@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPlanet } from './../actions';
+import Card from './Card';
 import './App.css';
 
 class App extends Component {
@@ -25,42 +26,12 @@ class App extends Component {
 
   render() {
     const { planet } = this.props;
-    console.log(this.props);
     return (
       <section className="App">
         <div className="container">
           <div className="row align-items-center justify-content-sm-center">
             <div className="col col-sm-4">
-              <div className="card">
-                {planet.loading ? (
-                  <p>Carregando...</p>
-                ) : (
-                  <div>
-                    <div className="card-header">
-                      <h1>{planet.name}</h1>
-                    </div>
-                    <div className="card-body">
-                      <p>{`Population: ${planet.population}`}</p>
-                      <p>{`Climate: ${planet.climate}`}</p>
-                      <p>{`Terrain: ${planet.terrain}`}</p>
-                      <p>Featured appear in:</p>
-                      <ul>
-                        {planet.films.map((movie, i) => (
-                          <li key={i}>{movie}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="card-footer">
-                      <button
-                        className="btn btn-primary"
-                        onClick={this.next}
-                      >
-                        Next Planet
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
+              <Card next={this.next} {...planet} />
             </div>
           </div>
         </div>
